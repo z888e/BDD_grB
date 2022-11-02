@@ -34,8 +34,8 @@ db.users = require('../models/user.models.js')(sequelize, Sequelize);
 
 db.recipes = require('../models/recipe.models.js')(sequelize, Sequelize);
 
-//We use hasMany() to help one User have many comments.
-//And belongsTo() to indicate that one Comment only belongs to one User. 
+//We use hasMany() to help one User have many recipes.
+//And belongsTo() to indicate that one Recipe only belongs to one User. 
 db.users.hasMany(db.recipes, { as: "recipes" });
 db.recipes.belongsTo(db.users, {
     foreignKey: "userId",
