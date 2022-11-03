@@ -7,8 +7,8 @@ const Recipe = db.recipes;
 exports.create = (request, response) => {
     //Save to MySQL database
     Recipe.create({
-        recipeName: request.body.recipeName,
         userId: request.body.userId,
+        recipeName: request.body.recipeName,
         description: request.body.description,
         image: request.body.image,
         cookingTime: request.body.cookingTime,

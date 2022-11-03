@@ -21,7 +21,7 @@ exports.create = (request, response) => {
 //FETCH all Users
 exports.findAll = (request, response) => {
     User.findAll({
-        include: ["recipes"]
+        include: ["recipe"]
     }).then(users => {
         response.send(users);
     });
@@ -30,7 +30,7 @@ exports.findAll = (request, response) => {
 //Find a User by Id
 exports.findByPk = (request, response) => {
     User.findByPk(request.params.userId, {
-        include: ["recipes"]
+        include: ["recipe"]
     }).then(user => {
         response.send(user);
     });
