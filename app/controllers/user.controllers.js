@@ -10,7 +10,9 @@ exports.create = (request, response) => {
         firstName: request.body.firstName,
         lastName: request.body.lastName,
         email: request.body.email,
-        password: request.body.password
+        password: request.body.password,
+        image: request.body.image,
+        userName: request.body.userName 
     }).then(user => {
         response.send(user);
     });

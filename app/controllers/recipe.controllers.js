@@ -1,14 +1,21 @@
 //recipe.controller.js
 const db = require('../configs/configs.js');
 
-const Recipe = db.recipe;
+const Recipe = db.recipes;
 
 //Post a recipe
 exports.create = (request, response) => {
     //Save to MySQL database
-    recipe.create({
-        content: request.body.content,
-        userId: request.body.userId
+    Recipe.create({
+        recipeName: request.body.recipeName,
+        userId: request.body.userId,
+        description: request.body.description,
+        image: request.body.image,
+        cookingTime: request.body.cookingTime,
+        season: request.body.season,
+        difficulty: request.body.difficulty,
+        budget: request.body.budget,
+        category: request.body.category
     }).then(recipe => {
         response.send(recipe);
     });
@@ -16,7 +23,7 @@ exports.create = (request, response) => {
 
 //FETCH all recipes
 exports.findAll = (request, response) => {
-    recipe.findAll({
+    Recipe.findAll({
         include: ["user"]
     }).then(recipes => {
         response.send(recipes);
@@ -25,7 +32,7 @@ exports.findAll = (request, response) => {
 
 //Find a recipe by Id
 exports.findByPk = (request, response) => {
-    recipe.findByPk(request.params.recipeId, {
+    Recipe.findByPk(request.params.recipeId, {
         include: ["user"]
     }).then(recipe => {
         response.send(recipe);
@@ -34,7 +41,7 @@ exports.findByPk = (request, response) => {
 
 exports.update = (request, response) => {
     const id = request.params.recipeId;
-    recipe.update({
+    Recipe.update({
         content: request.body.content
     }, {
         where: {
@@ -50,9 +57,9 @@ exports.update = (request, response) => {
 //Deleted a recipe by Id
 exports.delete = (request, response) => {
     const id = request.params.recipeId;
-    recipe.destroy({
+    Recipe.destroy({
         where: {
-             id: id 
+            id: id 
             }
     }).then(() => {
         response.status(200).send({
