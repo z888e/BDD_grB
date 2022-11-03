@@ -42,51 +42,104 @@ db.ustensil = require('../models/ustensil.models.js')(sequelize, Sequelize);
 
 //We use hasMany() to help one User have many recipes.
 //And belongsTo() to indicate that one Recipe only belongs to one User. 
-db.users.hasMany(db.recipes, { as: "recipes" });
-db.recipes.belongsTo(db.users, {
-    foreignKey: "userId",
-    as: "user"
+// db.users.hasMany(db.recipes, { as: "recipe" });
+// db.recipes.belongsTo(db.users, {
+//     foreignKey: "userId",
+//     as: "user"
+// });
+
+// //table favorite jonction user and recipe
+// db.favorite.associate = (models) => {
+//   db.users.belongsTo(models.Favorite, { foreignKey: 'userId', targetKey: 'userId', as: 'user' });
+//   db.recipes.belongsTo(models.Favorite, { foreignKey: 'recipeId', targetKey: 'recipeId', as: 'recipe' });
+// }
+// db.users.associate = (models) => {
+//   db.users.belongsToMany(models.Recipe, { as: 'Favorite', through: models.db.favorite, foreignKey: 'userId'});
+// }
+// db.recipes.associate = (models) => {
+//   db.recipes.belongsToMany(models.User, { as: 'Favorite', through: models.db.favorite, foreignKey: 'recipeId'});
+// }
+
+// //table RecipeIngredient junction Ingredient&Recipe
+// db.recipeIngredient.associate = (models) => {
+//   db.ingredient.belongsTo(models.recipeIngredient, { foreignKey: 'ingredientId', targetKey: 'ingredientId', as: 'ingredient' });
+//   db.recipes.belongsTo(models.recipeIngredient, { foreignKey: 'recipeId', targetKey: 'recipeId', as: 'recipe' });
+// }
+
+// db.ingredient.associate = (models) => {
+//   db.ingredient.belongsToMany(models.User, { as: 'recipeIngredient', through: models.db.favorite, foreignKey: 'ingredientId'});
+// }
+
+// db.recipes.associate = (models) => {
+//   db.recipes.belongsToMany(models.Recipe, { as: 'recipeIngredient', through: models.db.favorite, foreignKey: 'recipeId'});
+// }
+
+// //table stepUstensil junction ustensil&Recipe
+
+// db.stepUstensil.associate = (models) => {
+//   db.ustensil.belongsTo(models.stepUstensil, { foreignKey: 'ustensilId', targetKey: 'ustensilId', as: 'ustensil' });
+//   db.recipes.belongsTo(models.stepUstensil, { foreignKey: 'recipeId', targetKey: 'recipeId', as: 'recipe' });
+// }
+
+// db.ustensil.associate = (models) => {
+//   db.ustensil.belongsToMany(models.User, { as: 'recipeUstensil', through: models.db.favorite, foreignKey: 'ustensilId'});
+// }
+
+// db.recipes.associate = (models) => {
+//   db.recipes.belongsToMany(models.Recipe, { as: 'recipeUstensil', through: models.db.favorite, foreignKey: 'recipeId'});
+// }
+
+db.users.hasMany(db.recipes, { as: "recipe" });
+db.recipes.belongsTo(db.users, { 
+  foreignKey: "userId",
+  as: "user"
 });
 
-//table favorite jonction user and recipe
-db.favorite.associate = (models) => {
-  db.users.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'userId', as: 'user' });
-  db.recipes.belongsTo(models.Recipe, { foreignKey: 'recipeId', targetKey: 'recipeId', as: 'recipe' });
-}
-db.users.associate = (models) => {
-  db.users.belongsToMany(models.User, { as: 'Favorite', through: models.db.favorite, foreignKey: 'userId'});
-}
-db.recipes.associate = (models) => {
-  db.recipes.belongsToMany(models.Recipe, { as: 'Favorite', through: models.db.favorite, foreignKey: 'recipeId'});
-}
+db.recipes.hasMany(db.step, { as: "steps"});
+db.step.belongsTo(db.recipes, { 
+  foreignKey: "recipeId",
+  as: "recipe"
+});
 
-//table RecipeIngredient junction Ingredient&Recipe
-db.recipeIngredient.associate = (models) => {
-  db.ingredient.belongsTo(models.Ingredient, { foreignKey: 'ingredientId', targetKey: 'ingredientId', as: 'ingredient' });
-  db.recipes.belongsTo(models.Recipe, { foreignKey: 'recipeId', targetKey: 'recipeId', as: 'recipe' });
-}
+db.ingredient.belongsToMany(db.recipes, {
+  through: "recipeIngredients"
+});
 
-db.ingredient.associate = (models) => {
-  db.ingredient.belongsToMany(models.User, { as: 'recipeIngredient', through: models.db.favorite, foreignKey: 'ingredientId'});
-}
+db.recipes.belongsToMany(db.ingredient, {
+  through: "recipeIngredients"
+});
 
-db.recipes.associate = (models) => {
-  db.recipes.belongsToMany(models.Recipe, { as: 'recipeIngredient', through: models.db.favorite, foreignKey: 'recipeId'});
-}
+db.ingredient.hasMany(db.recipeIngredient)
+db.recipeIngredient.belongsTo(db.ingredient)
 
-//table stepUstensil junction ustensil&Recipe
+db.recipes.hasMany(db.recipeIngredient)
+db.recipeIngredient.belongsTo(db.recipes)
 
-db.stepUstensil.associate = (models) => {
-  db.ustensil.belongsTo(models.ustensil, { foreignKey: 'ustensilId', targetKey: 'ustensilId', as: 'ustensil' });
-  db.recipes.belongsTo(models.Recipe, { foreignKey: 'recipeId', targetKey: 'recipeId', as: 'recipe' });
-}
+db.ustensil.belongsToMany(db.recipes, {
+  through: "stepUstensil"
+});
 
-db.ustensil.associate = (models) => {
-  db.ustensil.belongsToMany(models.User, { as: 'recipeUstensil', through: models.db.favorite, foreignKey: 'ustensilId'});
-}
+db.recipes.belongsToMany(db.ustensil, {
+  through: "stepUstensil"
+});
 
-db.recipes.associate = (models) => {
-  db.recipes.belongsToMany(models.Recipe, { as: 'recipeUstensil', through: models.db.favorite, foreignKey: 'recipeId'});
-}
+db.ustensil.hasMany(db.stepUstensil)
+db.stepUstensil.belongsTo(db.ustensil)
+db.recipes.hasMany(db.stepUstensil)
+db.stepUstensil.belongsTo(db.recipes)
+
+db.users.belongsToMany(db.recipes, {
+  through: "favorite"
+});
+
+db.recipes.belongsToMany(db.users, {
+  through: "favorite"
+});
+
+db.users.hasMany(db.favorite)
+db.favorite.belongsTo(db.users)
+
+db.recipes.hasMany(db.favorite)
+db.favorite.belongsTo(db.recipes)
 
 module.exports = db;
