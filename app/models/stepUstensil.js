@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const stepUtensilId = sequelize.define("recipeIngredients", {
+    const stepUstensilId = sequelize.define("recipeIngredients", {
         recipeIngredientId: {
             type: Sequelize.INTEGER,
             allowNull: false,
@@ -14,15 +14,15 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'recipeId'
             },
         },
-        utensilId: {
+        ustensilId: {
             type: Sequelize.INTEGER,
             primaryKey: false,
             references: {
-                model: 'utensil',
-                key: 'utensilId'
+                model: 'ustensil',
+                key: 'ustensilId'
             }
         }
     });
 
-    return stepUtensilId;
+    return stepUstensilId;
 }
