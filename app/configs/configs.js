@@ -35,6 +35,10 @@ db.recipes = require('../models/recipe.models.js')(sequelize, Sequelize);
 db.step = require('../models/step.models.js')(sequelize, Sequelize);
 db.ustensil = require('../models/ustensil.models.js')(sequelize, Sequelize);
 db.ingredient = require('../models/ingredient.models.js')(sequelize, Sequelize);
+db.favorite = require('../models/favorite.models.js')(sequelize, Sequelize);
+db.recipeIngredient = require('../models/ingredient.models.js')(sequelize, Sequelize);
+db.stepUtensil = require('../models/stepUtensil.js')(sequelize, Sequelize);
+db.ustensil = require('../models/ustensil.models.js')(sequelize, Sequelize);
 
 //We use hasMany() to help one User have many recipes.
 //And belongsTo() to indicate that one Recipe only belongs to one User. 
