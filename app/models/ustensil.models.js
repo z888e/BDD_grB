@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-    const Ustensil = sequelize.define("ustensil", {
-        ustensilId: {
+    const Utensil = sequelize.define("utensil", {
+        utensilId: {
             type: Sequelize.INTEGER,
             allowNull: false,
             autoIncrement: true,
@@ -11,5 +11,5 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    return Ustensil;
+    return Utensil;
 }
