@@ -48,4 +48,33 @@ db.recipes.belongsTo(db.users, {
     as: "user"
 });
 
+//table favorite jonction user and recipe
+db.favorite.associate = (models) => {
+  db.users.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'userId', as: 'user' });
+  db.recipes.belongsTo(models.Recipe, { foreignKey: 'recipeId', targetKey: 'recipeId', as: 'recipe' });
+}
+db.users.associate = (models) => {
+  db.users.belongsToMany(models.User, { as: 'Favorite', through: models.db.favorite, foreignKey: 'userId'});
+}
+db.recipes.associate = (models) => {
+  db.recipes.belongsToMany(models.Recipe, { as: 'Favorite', through: models.db.favorite, foreignKey: 'recipeId'});
+}
+
+//table RecipeIngredient junction Ingredient&Recipe
+db.recipeIngredient.associate = (models) => {
+  db.ingredient.belongsTo(models.Ingredient, { foreignKey: 'ingredientId', targetKey: 'ingredientId', as: 'ingredient' });
+  db.recipes.belongsTo(models.Recipe, { foreignKey: 'recipeId', targetKey: 'recipeId', as: 'recipe' });
+}
+
+db.ingredient.associate = (models) => {
+  db.ingredient.belongsToMany(models.User, { as: 'recipeIngredient', through: models.db.favorite, foreignKey: 'ingredientId'});
+}
+
+db.recipes.associate = (models) => {
+  db.recipes.belongsToMany(models.Recipe, { as: 'recipeIngredient', through: models.db.favorite, foreignKey: 'recipeId'});
+}
+
+//table stepUtensil junction utensil&Recipe
+
+
 module.exports = db;
