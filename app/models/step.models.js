@@ -5,8 +5,8 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true
-          },
-          time: {
+        },
+        time: {
             type: Sequelize.TIME,
         },
         description: {
