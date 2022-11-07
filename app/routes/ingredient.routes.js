@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const ingredients = require('../controllers/ingredients.controllers.js');
+    const ingredients = require('../controllers/ingredient.controllers.js');
 
     //Create a new ustensil
     app.post('/ingredients', ingredients.create);

@@ -17,7 +17,7 @@ exports.create = (request, response) => {
 //FETCH all recipes
 exports.findAll = (request, response) => {
     RecipeIngredient.findAll({
-        include: ["Ingredient", "Recipe"]
+        include: ["ingredient", "recipe"]
     }).then(recipes => {
         response.send(recipes);
     });
@@ -26,7 +26,7 @@ exports.findAll = (request, response) => {
 //Find a recipe by Id
 exports.findByPk = (request, response) => {
     RecipeIngredient.findByPk(request.params.recipeIngredientId, {
-        include: ["Ingredient", "Recipe"]
+        include: ["ingredient", "recipe"]
     }).then(recipeIngredient => {
         response.send(recipeIngredient);
     });

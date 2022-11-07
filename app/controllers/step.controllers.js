@@ -17,7 +17,7 @@ exports.create = (request, response) => {
 //FETCH all Steps
 exports.findAll = (request, response) => {
     Step.findAll({
-        include: ["recipes"]
+        include: ["recipe"]
     }).then(step => {
         response.send(step);
     });
@@ -26,7 +26,7 @@ exports.findAll = (request, response) => {
 //Find a Step by Id
 exports.findByPk = (request, response) => {
     Step.findByPk(request.params.stepId, {
-        include: ["recipes"]
+        include: ["recipe"]
     }).then(step => {
         response.send(step);
     });

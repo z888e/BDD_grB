@@ -7,7 +7,7 @@ const stepUtensil = db.stepUstensil;
 //FETCH all stepUtensil 
 exports.findAll = (request, response) => {
     stepUtensil.findAll({
-        include: ["recipes", "utensil"]
+        include: ["recipe", "ustensil"]
     }).then(stepUtensil => {
         response.send(stepUtensil);
     });
@@ -16,7 +16,7 @@ exports.findAll = (request, response) => {
 //Find a stepUtensil by Id
 exports.findByPk = (request, response) => {
     stepUtensil.findByPk(request.params.ingredientId, {
-        include: ["recipes", "utensil"]
+        include: ["recipe", "ustensil"]
     }).then(stepUtensil => {
         response.send(stepUtensil);
     });
