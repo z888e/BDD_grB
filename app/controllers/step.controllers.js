@@ -7,6 +7,7 @@ const Step = db.step;
 exports.create = (request, response) => {
     //Save to MySQL database
     Step.create({
+        recipeId: request.body.recipeId,
         time: request.body.time,
         description: request.body.description
     }).then(step => {
