@@ -1,19 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Recipe = sequelize.define("recipe", {
-        // recipeId: {
-        //     type: Sequelize.INTEGER,
-        //     allowNull: false,
-        //     autoIncrement: true,
-        //     primaryKey: true
-        // },
-        // userId: {
-        //     type: Sequelize.INTEGER,
-        //     primaryKey: false,
-        //     references: {
-        //         model: 'user',
-        //         key: 'userId'
-        //     },
-        // },
+    const Recipes = sequelize.define("recipe", {
         recipeName: {
             type: Sequelize.STRING
         },
@@ -40,5 +26,5 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    return Recipe;
+return Recipes;
 }
