@@ -9,27 +9,26 @@ module.exports = {
 
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize(
-    process.env.DATABASE, 
-    process.env.USERNAME, 
-    process.env.PASSWORD, {
-  host: process.env.HOST,
-  dialect: 'postgres'
+// const sequelize = new Sequelize(
+//     process.env.DATABASE, 
+//     process.env.USERNAME, 
+//     process.env.PASSWORD, {
+//   host: process.env.HOST,
+//   dialect: 'postgres'
   
-});
+// });
 
 //sequelize prod
-// const Sequelize = require('sequelize');
-// const sequelize = new Sequelize(process.env.DATABASE_URL, {
-//     dialect: 'postgres',
-//     dialectOptions: {
-//       ssl: {
-//         require: true,
-//         rejectUnauthorized: false
-//       }
-//     }
-//   }
-// );
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
+  }
+);
 
 sequelize
   .authenticate()
