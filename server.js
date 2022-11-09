@@ -9,9 +9,9 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const db = require('./app/configs/configs.js');
-db.sequelize.sync({force: true})
+db.sequelize.sync({force: false})
 .then(() => {
-    console.log('Drop and Resync with { force: true }');
+    console.log('Drop and Resync with { force: false}');
 });
 
 //api routes
