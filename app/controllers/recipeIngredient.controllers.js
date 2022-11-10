@@ -7,6 +7,8 @@ const RecipeIngredient = db.recipeIngredient;
 exports.create = (request, response) => {
     //Save to MySQL database
     RecipeIngredient.create({
+        recipeId: request.body.recipeId,
+        ingredientId: request.body.ingredientId,
         quantity: request.body.quantity,
         unit: request.body.unit
     }).then(recipeIngredient => {

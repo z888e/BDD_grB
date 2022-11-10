@@ -7,7 +7,7 @@ const Ustensil = db.ustensil;
 exports.create = (request, response) => {
     //Save to MySQL database
     Ustensil.create({
-        name:response.body.name
+        name:request.body.name
     }).then(ustensil => {
         response.send(ustensil);
     });

@@ -1,6 +1,8 @@
 module.exports = (app) => {
-    const stepUstensil = require('../controllers/stepUstensil.controllers.js');
-    
+    const stepUstensil = require('../controllers/stepUstensil.controllers');
+    //Create a new ustensil
+    app.post('/stepUstensil', stepUstensil.create);
+
     //Retrieve all recipe
     app.get('/stepUstensil', stepUstensil.findAll);
 

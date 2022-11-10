@@ -3,6 +3,15 @@ const db = require('../configs/configs.js');
 
 const stepUtensil = db.stepUstensil;
 
+exports.create = (request, response) => {
+    //Save to MySQL database
+    stepUtensil.create({
+        recipeId: request.body.recipeId,
+        ustensilId: request.body.ustensilId
+    }).then(stepUtensil => {
+        response.send(stepUtensil);
+    });
+};
 
 //FETCH all stepUtensil 
 exports.findAll = (request, response) => {
